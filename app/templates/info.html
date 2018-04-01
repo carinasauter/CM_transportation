@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Connex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+  </head>
+
+  <body>
+    <div id='top_image'>
+      <div id = 'headline'>
+        <button id='logout'  onclick="window.location.href='{{ url_for( 'logout') }}';" type="button">Log out
+        </button>
+      </div>
+    </div>
+    <div id='rest'>
+      <h1 id ='welcome' > Welcome! </h1>
+      <p>Connex is the best way to make sure your child is safe while out exploring the world on her scooter.
+      Using Connex, you can know where your child is at all times, and call them home when necessary. </p>
+
+      <div id="board">
+        <div class="column">
+          <div>
+            
+            <button type="action" id='comeHomeButton' onclick="window.location.href='{{ url_for( 'triggerComeHome') }}">Ask Alex to come home</button>
+            <p id="request"></p>
+            <p id="response"></p>
+          </div>
+        </div>
+
+        <div class="column">
+          <button type="action" id='getLocationButton' onclick="window.location.href='{{url_for('getLocation')}}">Get Location</button>
+          <div id = "iframecontainer">
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</html>

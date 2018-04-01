@@ -1,0 +1,9 @@
+Flask
+gunicorn
+Jinja2
+flask-login
+werkzeug
+flask_sqlalchemy
+flask_wtf
+Adafruit_IO
+json

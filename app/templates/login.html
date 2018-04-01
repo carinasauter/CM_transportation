@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Connex</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    </head>
+    <body>
+        <div class="login-form">
+            <div class="form-group ">
+                <form action="" method="post">
+                    <h1>Connex</h1>
+                    <h3>Let your children explore, safely.</h3>
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.username(placeholder = "Username") }}
+                    </p>
+                    <p>
+                        {{ form.password(placeholder = "Password") }}
+                    </p>
+                    <p>{{ form.submit(class = "log-btn") }}</p>
+                    <p id='alt_option'>
+                        <a href="{{ url_for( 'signup') }}">sign up</a></p>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
