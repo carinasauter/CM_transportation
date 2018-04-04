@@ -18,16 +18,11 @@ socketio = SocketIO(app, async_mode=async_mode, logger=True, engineio_logger=Tru
 app.config['SECRET'] = 'my secret key'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['MQTT_BROKER_URL'] = 'broker.hivemq.com'
-# app.config['MQTT_BROKER_PORT'] = 1883
+app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_USERNAME'] = ''
 app.config['MQTT_PASSWORD'] = ''
 app.config['MQTT_KEEPALIVE'] = 5
 app.config['MQTT_TLS_ENABLED'] = False
-
-# Parameters for SSL enabled
-app.config['MQTT_BROKER_PORT'] = 8883
-app.config['MQTT_TLS_INSECURE'] = True
-app.config['MQTT_TLS_CA_CERTS'] = 'ca.crt'
 
 
 app.config.from_object('config')
