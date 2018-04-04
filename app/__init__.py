@@ -3,10 +3,8 @@ from flask_mqtt import Mqtt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_socketio import SocketIO
-from threading import Lock
 import eventlet
 eventlet.monkey_patch()
-from flask_bootstrap import Bootstrap
 
 
 app = Flask(__name__)
@@ -20,7 +18,6 @@ socketio = SocketIO(app, async_mode=async_mode, logger=True, engineio_logger=Tru
 thread = None
 thread_lock = Lock()
 
-bootstrap = Bootstrap(app)
 # app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['MQTT_BROKER_URL'] = 'io.adafruit.com'
 app.config['MQTT_BROKER_PORT'] = 1883
