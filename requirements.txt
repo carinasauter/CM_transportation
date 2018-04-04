@@ -8,3 +8,4 @@ flask_wtf
 Adafruit_IO
 flask_socketio
 flask_mqtt
+eventlet
