@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, url_for, flash
-from app import app, models, db, login_manager, socketio, bootstrap, mqtt
+from app import app, models, db, login_manager, socketio, mqtt
 from .forms import LoginForm, SignUpForm
 from .models import *
 import requests

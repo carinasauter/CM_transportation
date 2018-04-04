@@ -15,8 +15,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 async_mode = 'eventlet'
 socketio = SocketIO(app, async_mode=async_mode, logger=True, engineio_logger=True)
-thread = None
-thread_lock = Lock()
 
 # app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['MQTT_BROKER_URL'] = 'io.adafruit.com'
