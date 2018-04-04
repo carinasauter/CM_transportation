@@ -6,4 +6,5 @@ werkzeug
 flask_sqlalchemy
 flask_wtf
 Adafruit_IO
-json
+flask_socketio
+flask_mqtt
