@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request, url_for, flash
-from app import app, models, db, login_manager
+from app import app, models, db, login_manager, socketio, bootstrap, mqtt
 from .forms import LoginForm, SignUpForm
 from .models import *
 import requests
@@ -16,12 +16,11 @@ ADAFRUIT_IO_KEY = '80009f64496041f79d5f440181eeb727'
 ADAFRUIT_IO_USERNAME = 'caycay'
 
 
-@app.route('/triggerComeHome')
+@app.route('/triggerComeHome', methods=['GET', 'POST'])
 def triggerComeHome():
     aio = Client(ADAFRUIT_IO_KEY)
     aio.send('comeHome', 0)
-    print("Come Home!")
-    startMQTT();
+    mqtt.subscribe("caycay/feeds/cominghome")
     data = {}
     return json.dumps(data)
 
@@ -29,7 +28,6 @@ def triggerComeHome():
 def getLocation():
     aio = Client(ADAFRUIT_IO_KEY)
     aio.send('locationRequest', 1)
-    print("Location request sent!")
     data = requests.get('https://io.adafruit.com/api/v2/' + ADAFRUIT_IO_USERNAME + '/feeds/gps/data/last?X-AIO-Key=' + ADAFRUIT_IO_KEY).content.decode("utf-8")
     data = json.loads(data)
     location_data = data['location']
@@ -42,7 +40,7 @@ def getLocation():
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for('display_info'))
+        return render_template('info.html', async_mode=socketio.async_mode)
     else:
         # we should have a landing page for user who have not logged in or signed up
         return redirect(url_for('login'))
@@ -91,7 +89,7 @@ def protected():
     return 'Logged in as: ' + current_user.username
 
 
-@app.route('/info', methods=['GET', 'POST'])
+@app.route('/info')
 @login_required
 def display_info():
     return render_template('info.html')
@@ -106,4 +104,5 @@ def logout():
 @login_manager.unauthorized_handler
 def unauthorized_handler():
     return redirect(url_for('login'))
+
 

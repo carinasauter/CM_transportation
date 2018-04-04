@@ -13,6 +13,7 @@ function addFrame(latitude, longitude) {
 function appendRequest(data) {
 	var stringToAppend = 'Alex has been asked to come home. Waiting for response...';
 	$('#request').append(stringToAppend);
+	$('#response').empty();
 }
 
 $(document).ready(
@@ -40,4 +41,9 @@ $(document).ready(
         	});
     	return false;
     });
+});
+
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+socket.on('my_response', function (data) {
+  $('#response').append("Alex is coming home!");
 });
