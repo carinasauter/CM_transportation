@@ -68,18 +68,22 @@ def getUserID(query):
 		return result[0][0]
 
 
+# Helper function for login process
 @login_manager.user_loader
 def load_user(id):
      return getUserByID(id)
 
+""" Creates a new user in database based on form input
+"""
 def create_user(username, email, password_hash):
 	with sql.connect('database.db') as connection:
 		cursor = connection.cursor()
 		cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (?,?,?)",(username, email, password_hash))
 		connection.commit()
 
-
+""" When new value is added to subscribed to feed 
+(coming Home in this case), signal is sent to frontend javascript
+"""
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
     socketio.emit('my_response',  "hello")
-

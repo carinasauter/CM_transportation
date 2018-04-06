@@ -1,3 +1,5 @@
+
+// adds google frame when location is requested
 function addFrame(latitude, longitude) {
 	var lat_degrees = latitude.substring(0,2);
 	var lat_minutes = latitude.substring(2,4) + "." + latitude.substring(5,);
@@ -10,12 +12,14 @@ function addFrame(latitude, longitude) {
 	$('#iframecontainer').append(stringToAppend);
 };
 
+// adds acknowledgement of come Home request when come Home button on website is pressed
 function appendRequest(data) {
 	var stringToAppend = 'Alex has been asked to come home. Waiting for response...';
 	$('#request').append(stringToAppend);
 	$('#response').empty();
 }
 
+// come home button
 $(document).ready(
 	function() {
 		$('#comeHomeButton').on('click', function() {
@@ -28,6 +32,8 @@ $(document).ready(
     });
 });
 
+
+// get location button
 $(document).ready(
 	function() {
 		$('#getLocationButton').on('click', function() {
@@ -43,6 +49,7 @@ $(document).ready(
     });
 });
 
+// websocket connection to listen to button press on Arduino in real-time
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 socket.on('my_response', function (data) {
   $('#response').append("Alex is coming home!");
